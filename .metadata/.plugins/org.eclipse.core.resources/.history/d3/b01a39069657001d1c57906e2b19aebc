@@ -1,0 +1,10 @@
+package com.gft.milhas.entities;
+
+public class Atividade {
+
+	private int idatividade;
+	private String nome;
+	private Date prazo_inicial;
+	private Date prazo_final;
+	
+}

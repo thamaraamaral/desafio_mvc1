@@ -1,0 +1,10 @@
+package com.gft.milhas.models;
+
+public class EventoCadastroModel {
+
+	private String nome;
+	private String dataInicio;
+	private String dataFinal;
+	
+	
+}

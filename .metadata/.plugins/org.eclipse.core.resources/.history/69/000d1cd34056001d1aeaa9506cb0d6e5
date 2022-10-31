@@ -1,0 +1,5 @@
+package com.gft.milhas.models;
+
+public class EventosConsultaModel {
+
+}

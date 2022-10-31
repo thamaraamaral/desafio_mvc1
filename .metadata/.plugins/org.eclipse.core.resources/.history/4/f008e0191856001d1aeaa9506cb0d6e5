@@ -1,0 +1,5 @@
+package com.gft.milhas.repositories;
+
+public class UsuarioRepository {
+
+}

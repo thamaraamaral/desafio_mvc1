@@ -1,0 +1,5 @@
+package com.gft.milhas.factories;
+
+public class ConnectionFactory {
+
+}

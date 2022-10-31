@@ -1,0 +1,28 @@
+package com.gft.milhas.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gft.milhas.entities.Grupo;
+import com.gft.milhas.models.EventoConsultaModel;
+import com.gft.milhas.models.GrupoConsultaModel;
+import com.gft.milhas.repositories.GrupoRepository;
+
+@Controller
+public class GrupoConsultaController {
+
+	@RequestMapping(value = "/grupos-consulta")
+	public ModelAndView consulta() {
+
+		ModelAndView modelAndView = new ModelAndView("grupos-consulta");
+
+		modelAndView.addObject("model", new EventoConsultaModel());
+		return modelAndView;
+	}
+
+}

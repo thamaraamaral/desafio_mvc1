@@ -1,0 +1,5 @@
+package com.gft.milhas.interfaces;
+
+public interface IGrupoRepository {
+
+}

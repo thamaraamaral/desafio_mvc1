@@ -1,0 +1,55 @@
+package com.gft.milhas.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.entities.Usuario;
+import com.gft.milhas.helpers.DateHelper;
+import com.gft.milhas.models.EventoCadastroModel;
+import com.gft.milhas.repositories.EventoRepository;
+
+@Controller
+public class EventosCadastroController {
+
+	@RequestMapping(value = "/eventos-cadastro")
+	public ModelAndView cadastro() {
+
+		ModelAndView modelAndView = new ModelAndView("eventos-cadastro");
+
+		modelAndView.addObject("model", new EventoCadastroModel());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/cadastrar-evento", method = RequestMethod.POST)
+	public ModelAndView cadastrarEvento(EventoCadastroModel model, HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView("eventos-cadastro");
+
+		try {
+
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario_auth");
+
+			Evento evento = new Evento();
+			
+			evento.setNome(model.getNome());
+			evento.setDataInicial(DateHelper.formatToDate(model.getDataInicio()));
+			evento.setDataFinal(DateHelper.formatToDate(model.getDataFinal()));
+			
+			EventoRepository eventoRepository = new EventoRepository();
+			eventoRepository.create(evento);
+
+			modelAndView.addObject("mensagem", "Evento cadastrado com sucesso!");
+		} catch (Exception e) {
+			modelAndView.addObject("mensagem", "Ocorreu um erro: " + e.getMessage());
+		}
+
+		modelAndView.addObject("model", new EventoCadastroModel());
+		return modelAndView;
+	}
+
+}

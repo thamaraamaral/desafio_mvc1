@@ -1,0 +1,15 @@
+package com.gft.milhas.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class EventoEdicaoController {
+
+	@RequestMapping(value = "/eventos-edicao")
+	public ModelAndView edicao() {
+		
+		ModelAndView modelAndView = new ModelAndView("eventos-edicao");
+		return modelAndView;
+	}
+	
+}

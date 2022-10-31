@@ -1,0 +1,18 @@
+package com.gft.milhas.interfaces;
+
+import java.util.List;
+
+import com.gft.milhas.entities.Grupo;
+
+public interface IGrupoRepository {
+	
+	void create(Grupo grupo) throws Exception;
+
+	void update(Grupo grupo) throws Exception;
+
+	void delete(Grupo grupo) throws Exception;
+
+	List<Grupo> findAllPorEvento(int idEvento) throws Exception;
+
+	Grupo findById(Integer idGrupo) throws Exception;
+}

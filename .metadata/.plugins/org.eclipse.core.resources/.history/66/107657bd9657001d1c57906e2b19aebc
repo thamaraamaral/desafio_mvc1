@@ -1,0 +1,16 @@
+package com.gft.milhas.repositories;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+public class EventoRepository implements IEventoRepository{
+
+	@Override
+	public void create(Evento evento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+}

@@ -1,0 +1,20 @@
+package com.gft.milhas.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gft.milhas.models.EventoConsultaModel;
+
+@Controller
+public class GrupoConsultaController {
+	
+	@RequestMapping(value = "/grupos-consulta")
+	public ModelAndView consulta() {
+		
+		ModelAndView modelAndView = new ModelAndView("grupos-consulta");
+		
+		modelAndView.addObject("model", new EventoConsultaModel());
+		return modelAndView;
+	}
+}

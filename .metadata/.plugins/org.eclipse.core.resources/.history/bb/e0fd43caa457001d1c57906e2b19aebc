@@ -1,0 +1,21 @@
+package com.gft.milhas.interfaces;
+
+import com.gft.milhas.entities.Evento;
+
+public interface IEventoRepository {
+
+	
+		void create(Evento evento) throws Exception;
+
+		// método para atualizar uma tarefa no banco de dados
+		void update(Evento) throws Exception;
+
+		// método para excluir uma tarefa no banco de dados
+		void delete(Evento) throws Exception;
+
+		// método para realizar a consulta de tarefas por data
+		List<Evento> findAll(Date dataMin, Date dataMax) throws Exception;
+
+		// método para buscar 1 tarefa através do idTarefa
+		Evento findById(Integer idevento) throws Exception;
+	}

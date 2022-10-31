@@ -1,0 +1,141 @@
+package com.gft.milhas.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.factories.ConnectionFactory;
+import com.gft.milhas.helpers.DateHelper;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+public class EventoRepository implements IEventoRepository {
+
+	@Override
+	public void create(Evento evento) throws Exception {
+
+		// abrindo uma conexão com o banco de dados
+		Connection connection = ConnectionFactory.getConnection();
+
+		// Escrevendo uma query SQL para execução no banco de dados
+		PreparedStatement statement = connection.prepareStatement(
+				"insert into evento(nome, data_inicio, data_final) values(?, ?, ?)");
+
+		
+		statement.setString(1, evento.getNome());
+		statement.setString(2, DateHelper.formatToString(evento.getDataInicial()));
+		statement.setString(3, DateHelper.formatToString(evento.getDataFinal()));
+		
+		statement.execute();
+
+		connection.close();
+	}
+
+	@Override
+	public void update(Evento evento) throws Exception {
+		
+				Connection connection = ConnectionFactory.getConnection();
+
+				PreparedStatement statement = connection.prepareStatement(
+						"update evento set nome=?, data_inicio=?, data_final=? where idevento=?");
+
+				statement.setString(1, evento.getNome());
+				statement.setString(2, DateHelper.formatToString(evento.getDataInicial()));
+				statement.setString(3, DateHelper.formatToString(evento.getDataFinal()));
+				
+				statement.execute();
+
+				connection.close();
+		
+	}
+
+	@Override
+	public void delete(Evento evento) throws Exception {
+		
+				Connection connection = ConnectionFactory.getConnection();
+
+				// Escrevendo uma query SQL para execução no banco de dados
+				PreparedStatement statement = connection
+						.prepareStatement("delete from evento where idevento=?");
+
+				statement.setLong(1, evento.getIdEvento());
+				
+				statement.execute();
+
+				connection.close();
+		
+	}
+
+	@Override
+	public List<Evento> findAll(Date dataMin, Date dataMax) throws Exception {
+
+		// abrindo conexão com o banco de dados
+		Connection connection = ConnectionFactory.getConnection();
+
+		// Escrevendo uma query SQL para consultar as tarefas
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from tarefa where data between ? and ? and idusuario = ? order by data desc, hora desc");
+		
+		statement.setString(1, DateHelper.formatToString(dataMin));
+		statement.setString(2, DateHelper.formatToString(dataMax));
+		statement.setInt(3, idUsuario);
+
+		// executando e lendo o resultado da consulta
+		ResultSet resultSet = statement.executeQuery();
+
+		// criando uma lista de tarefas vazia
+		List<Tarefa> lista = new ArrayList<Tarefa>();
+
+		// lendo cada resultado obtido do SQL
+		while (resultSet.next()) {
+
+			Tarefa tarefa = new Tarefa();
+
+			tarefa.setIdTarefa(resultSet.getInt("idtarefa"));
+			tarefa.setNome(resultSet.getString("nome"));
+			tarefa.setData(DateHelper.formatToDate(resultSet.getString("data")));
+			tarefa.setHora(resultSet.getString("hora"));
+			tarefa.setPrioridade(resultSet.getInt("prioridade"));
+			tarefa.setDescricao(resultSet.getString("descricao"));
+
+			lista.add(tarefa); // adicionando na lista
+		}
+
+		connection.close(); // fechando a conexão
+		return lista; // retornando a lista
+	}
+
+	@Override
+	public Evento findById(Long idEvento) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement(
+				"select * from evento where id_evento=?");
+		
+		statement.setLong(1, idEvento);
+
+		// executando e lendo o resultado da consulta
+		ResultSet resultSet = statement.executeQuery();
+
+		Evento evento = null;
+
+		// lendo cada resultado obtido do SQL
+		if (resultSet.next()) {
+
+			evento = new Evento();
+
+			evento.setIdEvento(resultSet.getLong("id_evento"));
+			evento.setNome(resultSet.getString("nome"));
+			evento.setDataInicial(DateHelper.formatToDate(resultSet.getString("data_inicio")));
+			evento.setDataFinal(DateHelper.formatToDate(resultSet.getString("dat_final")));
+		}
+
+		connection.close(); // fechando a conexão
+		return evento; 
+	}
+}
+	

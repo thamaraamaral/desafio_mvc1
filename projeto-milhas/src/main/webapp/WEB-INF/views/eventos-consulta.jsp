@@ -1,0 +1,104 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8"%>
+	
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Consulta de Eventos</title>
+
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+label.error {
+	color: #d9534f;
+}
+
+input.error {
+	border: 1px solid #d9534f;
+}
+</style>
+
+</head>
+<body>
+
+	<!-- Menu do sistema -->
+	<jsp:include page="/WEB-INF/views/components/menu.jsp" />
+	<jsp:include page="/WEB-INF/views/components/notifications.jsp" />
+	<div class="container mt-4">
+
+		<div class="row mb-3">
+			<div class="col-md-6">
+				<h4>
+					<strong>GFT Milhas</strong> Consulta de Eventos
+				</h4>
+				Pesquise os eventos desejados:
+			</div>
+			<div class="col-md-6 text-end">
+				<div class="mt-2">
+					<strong>${mensagem}</strong>
+				</div>
+			</div>
+		</div>
+
+		<form action="consultar-eventos" method="post" class="mb-3">
+
+			<div class="row">
+				<div class="col-md-3">
+					<form:input path="model.dataInicio" id="dataInicio" name="dataInicio" type="date" class="form-control" ></form:input>
+				</div>
+				<div class="col-md-3">
+					<form:input path="model.dataFinal" id="dataInicio" name="dataInicio" type="date" class="form-control" ></form:input>
+				</div>
+				<div class="col-md-6">
+
+					<input type="submit" class="btn btn-primary"
+						value="Pesquisar Eventos" /> <a
+						href="/projeto-milhas/eventos-cadastro" class="btn btn-success">
+						Cadastrar Evento </a>
+				</div>
+			</div>
+
+		</form>
+
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th>Nome da evento</th>
+					<th>Data Início</th>
+					<th>Data Término</th>
+					<th></th>
+					<th></th>
+					<th>Operações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="/projeto-milhas/eventos-edicao"
+						class="btn btn-primary btn-sm"> Editar </a> <a href="#"
+						class="btn btn-danger btn-sm"> Excluir </a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">Quantidade de eventos: 0</td>
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+
+	<!-- JS do bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

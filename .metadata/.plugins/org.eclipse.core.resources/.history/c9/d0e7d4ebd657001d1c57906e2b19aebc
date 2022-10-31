@@ -1,0 +1,9 @@
+package com.gft.milhas.models;
+
+public class GrupoConsultaModel {
+
+	private int idGrupo;
+	private String nome;
+	private int quantidadeParticipantes;
+	
+}

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Evento</title>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<div class="container mt-4">
+
+		<div class="row mb-3">
+			<div class="col-md-12">
+				<h4>
+					<strong>GFT Milhas</strong> Cadastrar Evento
+				</h4>
+				Preencha o formulário para registar um evento:
+			</div>
+		</div>
+
+		<form class="mb-3">
+
+			<div class="row">
+				<div class="col-md-6">
+					<label>Nome do evento:</label>
+					<input type="text" class="form-control" placeholder="Digite o nome do evento aqui." />
+				</div>
+				<div class="col-md-3">
+					<label>Data Início:</label>
+					<input type="date" class="form-control"/>
+				</div>
+				
+				<div class="col-md-3">
+					<label>Data Término:</label>
+					<input type="date" class="form-control"/>
+				</div>
+				
+					
+			</div>
+
+		</form>
+
+	
+
+	</div>
+
+</body>
+</html>

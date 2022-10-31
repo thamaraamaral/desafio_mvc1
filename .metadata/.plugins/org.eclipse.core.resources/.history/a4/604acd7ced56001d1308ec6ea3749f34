@@ -1,0 +1,11 @@
+package com.gft.milhas.controller;
+
+public class EventoCadastroController {
+
+	@RequestMapping(value = "/eventos-cadastro")
+	public ModelAndView cadastro() {
+		
+		ModelAndView modelAndView = new ModelAndView("eventos-cadastro");
+		return modelAndView;
+	}
+}

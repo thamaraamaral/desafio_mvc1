@@ -1,0 +1,10 @@
+package com.gft.milhas.entities;
+
+public class Evento {
+
+	private Long idEvento;
+	private String nome;
+	private Date dataInicial;
+	private Date dataFinal;
+	
+}

@@ -1,0 +1,119 @@
+package com.gft.milhas.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.entities.Grupo;
+import com.gft.milhas.factories.ConnectionFactory;
+import com.gft.milhas.helpers.DateHelper;
+import com.gft.milhas.interfaces.IGrupoRepository;
+
+public class GrupoRepository implements IGrupoRepository {
+
+	@Override
+	public void create(Grupo grupo) throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("insert into grupo(nome, quantidade_participantes) values(?, ?)");
+
+		statement.setString(1, grupo.getNome());
+		statement.setInt(2, grupo.getQuantidadeParticipantes());
+
+		statement.execute();
+
+		connection.close();
+
+	}
+
+	@Override
+	public void update(Grupo grupo) throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("update grupo set nome=?, quantidade_participantes=? where idgrupo=?");
+
+		statement.setString(1, grupo.getNome());
+		statement.setInt(2, grupo.getQuantidadeParticipantes());
+		statement.setInt(3, grupo.getIdGrupo());
+
+		statement.execute();
+
+		connection.close();
+
+	}
+
+	@Override
+	public void delete(Grupo grupo) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("delete from grupo where idgrupo=?");
+
+		statement.setInt(1, grupo.getIdGrupo());
+		statement.execute();
+
+		connection.close();
+
+	}
+
+	@Override
+	public Grupo findById(Integer idGrupo) throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select * from grupo where idgrupo=?");
+
+		statement.setInt(1, idGrupo);
+
+		ResultSet resultSet = statement.executeQuery();
+
+		Grupo grupo = null;
+
+		if (resultSet.next()) {
+
+			grupo = new Grupo();
+
+			grupo.setIdGrupo(resultSet.getInt("idgrupo"));
+			grupo.setNome(resultSet.getString("nome"));
+			grupo.setIdGrupo(resultSet.getInt("quantidade_participantes"));
+
+		}
+
+		connection.close();
+		return grupo;
+	}
+
+	@Override
+	public List<Grupo> findAll(int idEvento) throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("select * from grupo where fk_idevento=?");
+
+		statement.setInt(1, idEvento);
+		
+		ResultSet resultSet = statement.executeQuery();
+
+		List<Grupo> lista = new ArrayList<Grupo>();
+
+		while (resultSet.next()) {
+
+			Grupo grupo = new Grupo();
+
+			grupo.setIdGrupo(resultSet.getInt("idgrupo"));
+			grupo.setNome(resultSet.getString("nome"));
+			
+
+			lista.add(grupo);
+		}
+
+		connection.close();
+		
+		return lista;
+
+	}
+}

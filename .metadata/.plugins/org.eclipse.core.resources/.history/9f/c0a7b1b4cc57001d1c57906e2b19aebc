@@ -1,0 +1,12 @@
+package com.gft.milhas.models;
+
+import java.util.List;
+
+public class GrupoEdicaoModel {
+
+	private int id;
+	private String nome;
+	private int quantidadeParticipantes;
+	private List<Participante> participantes;
+	
+}

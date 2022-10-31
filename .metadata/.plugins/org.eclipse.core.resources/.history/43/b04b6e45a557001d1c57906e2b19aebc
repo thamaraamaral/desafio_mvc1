@@ -1,0 +1,71 @@
+package com.gft.milhas.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Date;
+import java.util.List;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.factories.ConnectionFactory;
+import com.gft.milhas.helpers.DateHelper;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+public class EventoRepository implements IEventoRepository {
+
+	@Override
+	public void create(Evento evento) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("insert into evento(nome, data_inicio, data_final) values(?, ?, ?)");
+
+		statement.setString(1, evento.getNome());
+		statement.setString(2, DateHelper.formatToString(evento.getDataInicio()));
+		statement.setString(3, DateHelper.formatToString(evento.getDataFinal()));
+
+		statement.execute();
+
+		connection.close();
+	}
+
+	@Override
+	public void update(Evento evento) throws Exception {
+		// abrindo uma conexão com o banco de dados
+				Connection connection = ConnectionFactory.getConnection();
+
+				// Escrevendo uma query SQL para execução no banco de dados
+				PreparedStatement statement = connection.prepareStatement(
+						"update evento set nome=?, data_inicio=?, data_final=? where idevento=?");
+
+				statement.setString(1, tarefa.getNome());
+				statement.setString(2, DateHelper.formatToString(tarefa.getData()));
+				statement.setString(3, tarefa.getHora());
+				statement.setString(4, tarefa.getDescricao());
+				statement.setInt(5, tarefa.getPrioridade());
+				statement.setInt(6, tarefa.getIdTarefa());
+				statement.setInt(7, tarefa.getUsuario().getIdUsuario());
+				statement.execute();
+
+				connection.close();
+		
+	}
+
+	@Override
+	public void delete(Evento evento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Evento> findAll(Date dataMin, Date dataMax) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Evento findById(Integer idEvento) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

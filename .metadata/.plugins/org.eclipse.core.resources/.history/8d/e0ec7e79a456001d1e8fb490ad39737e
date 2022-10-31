@@ -1,0 +1,8 @@
+package com.gft.milhas.interfaces;
+
+public interface IEventoRepository {
+
+	// método para incluir uma tarefa no banco de dados
+		void create(Evento evento) throws Exception;
+	
+}

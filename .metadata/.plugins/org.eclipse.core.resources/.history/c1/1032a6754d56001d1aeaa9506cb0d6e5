@@ -1,0 +1,18 @@
+package com.gft.milhas.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class EventosCadastroController {
+
+	@RequestMapping(value = "/eventos-cadastro")
+	public ModelAndView cadastro() {
+		
+		ModelAndView modelAndView = new ModelAndView("eventos-cadastro");
+		return modelAndView;
+	}
+	
+		
+}

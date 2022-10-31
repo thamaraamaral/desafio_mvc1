@@ -1,0 +1,11 @@
+package com.gft.milhas.entities;
+
+public class Usuario {
+
+	private Long idUsuario;
+	private String nome;
+	private String quatroLetras;
+	private String email;
+	private String senha;
+	
+}

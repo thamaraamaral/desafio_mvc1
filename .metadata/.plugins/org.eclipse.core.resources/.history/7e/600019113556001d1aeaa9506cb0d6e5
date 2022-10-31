@@ -1,0 +1,27 @@
+package com.gft.milhas.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gft.milhas.models.LoginModel;
+
+@Controller
+public class LoginController {
+
+	@RequestMapping(value = "/")
+	public ModelAndView login() {
+		ModelAndView modelAndView = new ModelAndView("login");
+		
+		modelAndView.addObject("model", new LoginModel());
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/autenticar-usuario", method = RequestMethod.POST)
+	public ModelAndView autenticarUsuario() {
+		
+	}
+	
+}

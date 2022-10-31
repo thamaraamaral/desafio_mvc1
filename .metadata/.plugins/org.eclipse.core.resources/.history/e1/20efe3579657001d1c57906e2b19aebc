@@ -1,0 +1,41 @@
+package com.gft.milhas.repositories;
+
+import java.util.Date;
+import java.util.List;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+public class EventoRepository implements IEventoRepository{
+
+	@Override
+	public void create(Evento evento) throws Exception {
+		
+		
+	}
+
+	@Override
+	public void update(Evento evento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Evento evento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Evento> findAll(Date dataMin, Date dataMax) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Evento findById(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

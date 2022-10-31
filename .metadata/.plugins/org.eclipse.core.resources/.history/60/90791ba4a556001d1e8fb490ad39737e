@@ -1,0 +1,34 @@
+package com.gft.milhas.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.factories.ConnectionFactory;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+public class EventoRepository implements IEventoRepository {
+
+	@Override
+	public void create(Evento evento) throws Exception {
+
+		// abrindo uma conexão com o banco de dados
+		Connection connection = ConnectionFactory.getConnection();
+
+		// Escrevendo uma query SQL para execução no banco de dados
+		PreparedStatement statement = connection.prepareStatement(
+				"insert into evento(nome, data_inicio, data_final) values(?, ?, ?)");
+
+		statement.setString(1, tarefa.getNome());
+		statement.setString(2, DateHelper.formatToString(tarefa.getData()));
+		statement.setString(3, tarefa.getHora());
+		statement.setString(4, tarefa.getDescricao());
+		statement.setInt(5, tarefa.getPrioridade());
+		statement.setInt(6, tarefa.getUsuario().getIdUsuario());
+		statement.execute();
+
+		connection.close();
+	}
+
+}
+	

@@ -1,0 +1,10 @@
+package com.gft.milhas.models;
+
+public class GrupoEdicaoModel {
+
+	private int id;
+	private String nome;
+	private int quantidadeParticipantes;
+	private int idEvento;
+	
+}

@@ -1,0 +1,11 @@
+package com.gft.milhas.entities;
+
+public class Participante {
+
+	private int idparticipante;
+	private String nome;
+	private int nivel;
+	private String quatroLetras;
+	private String email;
+	
+}

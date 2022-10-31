@@ -1,0 +1,9 @@
+package com.gft.milhas.factories;
+
+public class ConnectionFactory {
+
+	private static final String HOST = "";
+	private static final String USER = "";
+	private static final String PASS = "";
+	
+}

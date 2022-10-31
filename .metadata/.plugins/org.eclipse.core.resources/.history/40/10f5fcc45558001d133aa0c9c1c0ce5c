@@ -1,0 +1,153 @@
+package com.gft.milhas.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.gft.milhas.entities.Evento;
+import com.gft.milhas.factories.ConnectionFactory;
+import com.gft.milhas.helpers.DateHelper;
+import com.gft.milhas.interfaces.IEventoRepository;
+
+@Component
+public class EventoRepository implements IEventoRepository {
+
+		
+	@Override
+	public void create(Evento evento) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("insert into evento(nome, data_inicio, data_final) values(?, ?, ?)");
+
+		statement.setString(1, evento.getNome());
+		statement.setString(2, DateHelper.formatToString(evento.getDataInicio()));
+		statement.setString(3, DateHelper.formatToString(evento.getDataFinal()));
+
+		statement.execute();
+
+		connection.close();
+	}
+
+	@Override
+	public void update(Evento evento) throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("update evento set nome=?, data_inicio=?, data_final=? where idevento=?");
+
+		statement.setString(1, evento.getNome());
+		statement.setString(2, DateHelper.formatToString(evento.getDataInicio()));
+		statement.setString(3, DateHelper.formatToString(evento.getDataFinal()));
+		statement.setInt(4, evento.getIdEvento());
+
+		statement.execute();
+
+		connection.close();
+
+	}
+
+	@Override
+	public void delete(Evento evento) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("delete from evento where idevento=?");
+
+		statement.setInt(1, evento.getIdEvento());
+		statement.execute();
+
+		connection.close();
+
+	}
+
+	@Override
+	public List<Evento> findAll(Date dataMin, Date dataMax) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection
+				.prepareStatement("select * from evento where data_inicio between ? and ?");
+
+		statement.setString(1, DateHelper.formatToString(dataMin));
+		statement.setString(2, DateHelper.formatToString(dataMax));
+
+		ResultSet resultSet = statement.executeQuery();
+
+		List<Evento> lista = new ArrayList<Evento>();
+
+		while (resultSet.next()) {
+
+			Evento evento = new Evento();
+
+			evento.setIdEvento(resultSet.getInt("idevento"));
+			evento.setNome(resultSet.getString("nome"));
+			evento.setDataInicio(DateHelper.formatToDate(resultSet.getString("data_inicio")));
+			evento.setDataFinal(DateHelper.formatToDate(resultSet.getString("data_final")));
+
+			lista.add(evento);
+		}
+
+		connection.close();
+		return lista;
+	}
+
+	@Override
+	public Evento findById(Integer idEvento) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select * from evento where idevento=?");
+
+		statement.setInt(1, idEvento);
+
+		ResultSet resultSet = statement.executeQuery();
+
+		Evento evento = null;
+
+		if (resultSet.next()) {
+
+			evento = new Evento();
+
+			evento.setIdEvento(resultSet.getInt("idevento"));
+			evento.setNome(resultSet.getString("nome"));
+			evento.setDataInicio(DateHelper.formatToDate(resultSet.getString("data_inicio")));
+			evento.setDataFinal(DateHelper.formatToDate(resultSet.getString("data_final")));
+
+		}
+
+		connection.close();
+		return evento;
+	}
+
+	@Override
+	public List<Evento> findEventosPorNome() throws Exception {
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select nome from evento");
+		ResultSet resultSet = statement.executeQuery();
+
+		List<Evento> lista = new ArrayList<Evento>();
+
+		while (resultSet.next()) {
+
+			Evento evento = new Evento();
+
+
+			evento.setNome(resultSet.getString("nome"));
+			
+
+			lista.add(evento);
+		}
+
+		connection.close();
+		return lista;
+	}
+
+}
